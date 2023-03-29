@@ -1,7 +1,8 @@
+import React, { useState } from "react";
 import ExpenseItem from "./componets/Expenses/ExpenseItem";
 import ExpenseForm from "./componets/newExpense/ExpenseForm.js";
 function App() {
-  const expenses = [
+  const [expenses,updateExpenses] = useState([
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -24,11 +25,15 @@ function App() {
       date: new Date(2021, 5, 12),
       location:"town",
     },
-  ];
-   const renderExpense = expenses.map(exp=><ExpenseItem {...exp} key={exp.id}></ExpenseItem>)
+  ]);
+  const addExpense = (expense)=>{
+    expense.date = new Date(expense.date);
+    updateExpenses(st=>[...st,expense]);
+  }
+   const renderExpense = expenses.map(exp=><ExpenseItem {...exp} key={exp.id}> </ExpenseItem>)
   return (
     <div>
-      <ExpenseForm></ExpenseForm>
+      <ExpenseForm addExpense={addExpense}></ExpenseForm>
       {renderExpense}
     </div>
   );
