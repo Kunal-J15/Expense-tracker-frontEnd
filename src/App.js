@@ -25,7 +25,7 @@ function App() {
       location:"town",
     },
   ];
-   const renderExpense = expenses.map(exp=><ExpenseItem {...exp}></ExpenseItem>)
+   const renderExpense = expenses.map(exp=><ExpenseItem {...exp} key={exp.id}></ExpenseItem>)
   return (
     <div>
       <ExpenseForm></ExpenseForm>
