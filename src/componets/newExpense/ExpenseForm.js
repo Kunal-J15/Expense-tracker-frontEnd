@@ -33,7 +33,7 @@ function ExpenseForm(props){
                 
                 <div className="new-expense__control">
                 <label htmlFor="date">Date</label>
-                <input onChange={handleChange} type="date" name="date" id="date" value={formData.date}/>
+                <input onChange={handleChange} type="date" name="date" id="date" value={formData.date} min='2020-01-01' max='2023-12-31'/>
                 </div> 
                 <br></br>
                 <button onClick={togleClick} type="button">Cancel</button>

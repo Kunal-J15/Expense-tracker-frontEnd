@@ -14,12 +14,12 @@ function ExpenseItem(props) {
     setTitle("Updated");
   }
   return (
-    <Card className="expense-item" id={props.id}>
-     <ExpenseDate date = {props.date}></ExpenseDate>
+<div className="expense-item">     <ExpenseDate date = {props.date}></ExpenseDate>
      <ExpenseDetails amount={amount}  location={props.location}   title={title} />
      <button onClick={handleClick}>expense=100</button>
      <button onClick={handleTitle}>title</button>
-    </Card>
+</div>
+
   );
 }
 

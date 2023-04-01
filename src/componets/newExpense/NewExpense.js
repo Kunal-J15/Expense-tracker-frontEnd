@@ -2,7 +2,8 @@ import React,{useState} from "react";
 import ExpenseItem from "../Expenses/ExpenseItem";
 import ExpenseForm from "../newExpense/ExpenseForm.js";
 import Filter from "../Filter.js";
-
+import Card from '../UI/Card';
+import ExpenseChart from '../Expenses/ExpenseChart.js'
 import "./NewExpense";
 function NewExpense(props){
     const [expenseList,filterExpenseList] = useState(props.expenses);
@@ -11,8 +12,7 @@ function NewExpense(props){
         expense.date = new Date(expense.date);
         expense.id = Math.random().toString();
         expense.location = "hamlet";
-        changeYear("a");
-        changeYear(year);
+        filterExpenseList([...props.expenses,expense])
         props.addExpense(expense);
       }
     const filter = (y)=>{
@@ -27,13 +27,14 @@ function NewExpense(props){
         }
     }
     const renderExpense = expenseList.map(exp=><ExpenseItem {...exp} key={exp.id}></ExpenseItem>)
-    return (<div>
+    return (<Card  id={props.id}>
       <div className='new-expense'>
       <ExpenseForm addExpense={addExpense}></ExpenseForm>
       </div>
       <Filter filter={filter}/>
+      <ExpenseChart expenses={expenseList} />
       {renderExpense.length===0 ? <h3>No expense available</h3> : renderExpense}
       {renderExpense.length===1 && <h3>Only single Expense here. Please add more...</h3>}
-    </div>)
+      </Card>)
 }
 export default NewExpense;
