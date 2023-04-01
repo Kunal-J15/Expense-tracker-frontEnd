@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import ExpenseItem from "./componets/Expenses/ExpenseItem";
-import ExpenseForm from "./componets/newExpense/ExpenseForm.js";
+import NewExpense from "./componets/newExpense/NewExpense"
 function App() {
   const [expenses,updateExpenses] = useState([
     {
@@ -27,14 +26,12 @@ function App() {
     },
   ]);
   const addExpense = (expense)=>{
-    expense.date = new Date(expense.date);
     updateExpenses(st=>[...st,expense]);
   }
-   const renderExpense = expenses.map(exp=><ExpenseItem {...exp} key={exp.id}> </ExpenseItem>)
+   
   return (
     <div>
-      <ExpenseForm addExpense={addExpense}></ExpenseForm>
-      {renderExpense}
+      <NewExpense expenses={expenses} addExpense={addExpense} />
     </div>
   );
 }
