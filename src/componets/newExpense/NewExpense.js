@@ -10,16 +10,17 @@ function NewExpense(props){
         expense.date = new Date(expense.date);
         expense.id = Math.random().toString();
         expense.location = "hamlet";
+        changeYear("a");
+        changeYear(year);
         props.addExpense(expense);
       }
     const filter = (y)=>{
-        
         if(year!=y){
             changeYear(y); 
             if(y=="All")filterExpenseList([...props.expenses]);
             else {
               const expenseList = props.expenses.filter(exp=>new Date(exp.date).getFullYear()==y)
-            filterExpenseList(expenseList)
+              filterExpenseList(expenseList)
             } 
             
         }
@@ -28,7 +29,8 @@ function NewExpense(props){
     return (<div>
       <ExpenseForm addExpense={addExpense}></ExpenseForm>
       <Filter filter={filter}/>
-      {renderExpense}
+      {renderExpense.length===0 ? <h3>No expense available</h3> : renderExpense}
+      {renderExpense.length===1 && <h3>Only single Expense here. Please add more...</h3>}
     </div>)
 }
 export default NewExpense;
