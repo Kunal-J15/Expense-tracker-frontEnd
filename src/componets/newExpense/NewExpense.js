@@ -3,6 +3,7 @@ import ExpenseItem from "../Expenses/ExpenseItem";
 import ExpenseForm from "../newExpense/ExpenseForm.js";
 import Filter from "../Filter.js";
 
+import "./NewExpense";
 function NewExpense(props){
     const [expenseList,filterExpenseList] = useState(props.expenses);
     const [year,changeYear] = useState(2023);
@@ -27,7 +28,9 @@ function NewExpense(props){
     }
     const renderExpense = expenseList.map(exp=><ExpenseItem {...exp} key={exp.id}></ExpenseItem>)
     return (<div>
+      <div className='new-expense'>
       <ExpenseForm addExpense={addExpense}></ExpenseForm>
+      </div>
       <Filter filter={filter}/>
       {renderExpense.length===0 ? <h3>No expense available</h3> : renderExpense}
       {renderExpense.length===1 && <h3>Only single Expense here. Please add more...</h3>}

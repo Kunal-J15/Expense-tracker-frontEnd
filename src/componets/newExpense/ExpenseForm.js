@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css"
 function ExpenseForm(props){
+    const [cliked,togleClicked] = useState(0);
     const handleSubmit = (e)=>{
         e.preventDefault();
+        togleClick();
         console.log(formData);
         props.addExpense(formData);
         changeFormData({title:'',amount:'',date:''});
@@ -12,8 +14,12 @@ function ExpenseForm(props){
         changeFormData((st)=>{return {...st,[e.target.name]:e.target.value}})
         console.log(formData);
     }
+
+    const togleClick = ()=>{
+        togleClicked(st=>!st);
+    }
     return (<div className="new-expense">
-        <form onSubmit={handleSubmit}>
+            {cliked ? <form onSubmit={handleSubmit}>
             <div>
                 <div className="new-expense__control">
                 <label htmlFor="title">Title</label>
@@ -30,10 +36,11 @@ function ExpenseForm(props){
                 <input onChange={handleChange} type="date" name="date" id="date" value={formData.date}/>
                 </div> 
                 <br></br>
+                <button onClick={togleClick} type="button">Cancel</button>
                 <button >Submit</button>
 
             </div>
-        </form>
+        </form>:<button onClick={togleClick}>Add expense</button>}
     </div>)
 }
 
